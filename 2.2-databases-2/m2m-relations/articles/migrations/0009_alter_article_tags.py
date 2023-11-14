@@ -1,0 +1,16 @@
+from django.db import migrations, models
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('articles', '0008_alter_article_tags'),
+    ]
+
+    operations = [
+        migrations.AlterField(
+            model_name = 'article',
+            name = 'tags',
+            field = models.ManyToManyField(related_name = 'is_main', through = 'articles.ArticleScope', to = 'articles.tag', verbose_name = 'Тема статьи'),
+        ),
+    ]

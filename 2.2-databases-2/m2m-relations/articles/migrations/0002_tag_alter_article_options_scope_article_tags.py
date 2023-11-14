@@ -10,32 +10,32 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Tag',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=50, unique=True, verbose_name='Название')),
+            name = 'Tag',
+            fields = [
+                ('id', models.AutoField(auto_created = True, primary_key = True, serialize = False, verbose_name = 'ID')),
+                ('title', models.CharField(max_length = 50, unique = True, verbose_name = 'Название')),
             ],
-            options={
+            options = {
                 'verbose_name': 'Раздел',
                 'verbose_name_plural': 'Разделы',
             },
         ),
         migrations.AlterModelOptions(
-            name='article',
-            options={'ordering': ['-published_at'], 'verbose_name': 'Статья', 'verbose_name_plural': 'Статьи'},
+            name = 'article',
+            options = {'ordering': ['-published_at'], 'verbose_name': 'Статья', 'verbose_name_plural': 'Статьи'},
         ),
         migrations.CreateModel(
-            name='Scope',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('is_main', models.BooleanField(default=False)),
-                ('article', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='articles.article')),
-                ('tag', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='articles.tag')),
+            name = 'Scope',
+            fields = [
+                ('id', models.AutoField(auto_created = True, primary_key = True, serialize = False, verbose_name = 'ID')),
+                ('is_main', models.BooleanField(default = False)),
+                ('article', models.ForeignKey(on_delete = django.db.models.deletion.CASCADE, to = 'articles.article')),
+                ('tag', models.ForeignKey(on_delete = django.db.models.deletion.CASCADE, to = 'articles.tag')),
             ],
         ),
         migrations.AddField(
-            model_name='article',
-            name='tags',
-            field=models.ManyToManyField(related_name='articles', through='articles.Scope', to='articles.tag'),
+            model_name = 'article',
+            name = 'tags',
+            field = models.ManyToManyField(related_name = 'articles', through = 'articles.Scope', to = 'articles.tag'),
         ),
     ]
