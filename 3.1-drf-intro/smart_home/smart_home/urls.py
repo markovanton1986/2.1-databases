@@ -13,10 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
+
 from django.urls import path, include
+
+from measurement.views import SensorsView, SensorView, MeasurementsView, UpdateSensor
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('measurement.urls')),  # подключаем маршруты из приложения measurement
+    path('sensors/', SensorsView.as_view()),  # краткая информация по всем датчикам, а также можно добавить новый датчик, указав
+                                                # "имя" и "описание"
+    path('sensor/<pk>/', SensorView.as_view()),  # полная информаця по одному датчику, а также его измерения
+    path('measurements/', MeasurementsView.as_view()),  # добавление нового измерения с указанием ID "датчика" и "температуры"
+    path('sensors/<pk>/', UpdateSensor.as_view())  # изменение "описания" датчика
 ]
